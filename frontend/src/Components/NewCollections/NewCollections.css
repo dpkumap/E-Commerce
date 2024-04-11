@@ -3,7 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: auto; /* Adjusted height to fit content */
+    /* height: auto; Adjusted height to fit content */
+    margin-bottom: 100px;
     padding: 20px; /* Added padding for spacing */
 }
 
