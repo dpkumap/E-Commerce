@@ -1,6 +1,11 @@
 .descriptionbox{
-
-    margin: 120px 170px;
+    width: 78%;
+    margin: auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    /* margin: 100px 170px; */
+    
+    /* border: 1px  solid firebrick; */
 
 }
 .descriptionbox-navigator{
