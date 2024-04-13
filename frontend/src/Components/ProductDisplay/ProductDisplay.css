@@ -98,8 +98,31 @@
 .productdisplay-right-sizes div{
 
     padding: 14px 20px;
-    background: #fbfbfb;
+    background: #f1f1f1;
     border: 1px solid #ebebeb ;
     border-radius: 3px;
     cursor: pointer;
+}
+.productdisplay-right button{
+
+    padding: 20px 0px;
+    width: 198px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background: #ff4141;
+    margin-bottom: 22px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+}
+.productdisplay-right-category{
+
+    margin-top: 8px;
+
+}
+.productdisplay-right-category span{
+    font-weight: 600;
+
 }
