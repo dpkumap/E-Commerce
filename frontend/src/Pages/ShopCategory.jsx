@@ -28,7 +28,7 @@ const ShopCategory= (props) =>{
                     if(props.category===item.category){
 
                         return  <div className="item-container3" key={index}>
-                        <Item name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price}/>
+                        <Item id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price}/>
                     </div>
                         
                     }else{
