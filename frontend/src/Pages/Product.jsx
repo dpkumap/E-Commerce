@@ -10,7 +10,7 @@ const Product = () => {
     const { all_product } = useContext(ShopContext);
     const { productId } = useParams();
     
-    console.log(all_product);
+    // console.log(all_product);
     // Make sure to check if productId is defined before filtering
     const product = productId ? all_product.find((e) => e.id === Number(productId)) : null;
 
