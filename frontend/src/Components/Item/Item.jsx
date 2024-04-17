@@ -7,8 +7,6 @@ const Item=(props)=>{
     return (
         
         <div className="item">
-            
-
            <Link to={`/product/${props.id}`}><img onClick={window.scrollTo(0,0)} src={props.image} alt="productimgs" /></Link>
             <p>{props.name}</p>
             <div className="item-prices">

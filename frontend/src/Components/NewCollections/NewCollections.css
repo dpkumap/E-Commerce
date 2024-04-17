@@ -28,6 +28,7 @@
 .item-container2 {
     display: flex;
     justify-content: center;
+    max-width: 100%;
 }
 
 .item-container2 img {
@@ -44,3 +45,4 @@
     border-radius: 10px;
     background: #252525;
 }
+
