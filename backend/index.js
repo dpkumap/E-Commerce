@@ -7,6 +7,7 @@ const multer = require('multer');
 const path=require('path');
 const cors=require('cors');
 const { type } = require('os');
+const { error } = require('console');
 
 
 app.use(express.json());
@@ -155,6 +156,108 @@ app.get('/allproducts',async (req,res)=>{
     console.log("all products fetched");
 
     res.send(products);
+})
+
+//creating users Schema
+
+const Users=mongoose.model('Users',{
+
+    name:{
+        type:String,
+
+    },
+    email:{
+        type:String,
+        unique:true,
+    },
+    password:{
+
+        type:String,
+    },
+    cartData:{
+
+        type:Object,
+
+    },
+    date:{
+
+        type:Date,
+        default:Date.now,
+    }
+})
+
+//creating APi(or endpoint) for registering user
+app.post('/signup',async (req,res)=>{
+
+    let check=await Users.findOne({email:req.body.email})
+    //in above if email id already there then we get that
+
+    if(check){
+
+        return res.status(400).json({success:false,errors:"existing user found with same email"})
+        
+    }
+    let cart={};
+
+    for(let i=0;i<300;i++){
+
+        cart[i]=0;
+
+    }
+
+    const user=new Users({
+
+        name:req.body.username,
+        email:req.body.email,
+        password:req.body.password,
+        cartData:cart,
+    })
+// above user created and 
+    await user.save(); //this will save that user in database
+
+    //creating token
+    const data={
+
+        user:{
+
+            id:user.id
+        }
+    }
+   //generating token we use sign()
+    const token=jwt.sign(data,'secret_ecom');
+    res.json({success:true,token})
+})
+
+//creating API for user login
+
+app.post('/login',async (req,res)=>{
+
+    let user=await Users.findOne({email:req.body.email});//using this we get email id perticular user
+
+    if(user){
+
+        const passCompare=req.body.password===user.password;
+
+        if(passCompare){
+
+            const data={
+
+                user:{
+
+                    id:user.id
+                }
+            }
+            const token=jwt.sign(data,'secret_ecom');
+            res.json({success:true,token});
+        }else{
+
+            res.json({success:false,errors:"Wrong Password"});
+        }
+    }
+    else{
+
+        res.json({success:false,errors:"Wrong Email Id"})
+    }
 })
 
 app.listen(port,(error)=>{
