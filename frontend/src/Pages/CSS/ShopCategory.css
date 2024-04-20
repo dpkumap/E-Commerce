@@ -1,3 +1,5 @@
+
+
 .shop-category {
     display: flex;
     flex-direction: column;
@@ -252,8 +254,9 @@
         
    }
    .item-container3{
-
-    max-width: 61%;
+    
+    border: 2px solid greenyellow;
+    max-width: 100%;
     
    }
     
