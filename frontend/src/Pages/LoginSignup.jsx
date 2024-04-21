@@ -50,6 +50,7 @@ const LoginSignup = () =>{
         }
     }
     const signup = async () => {
+        
         try {
             let responseData;
             await fetch('http://localhost:4000/signup', {
@@ -87,9 +88,9 @@ const LoginSignup = () =>{
             <div className="loginsignup-container">
                 <h1>{state}</h1>
                 <div className="loginsignup-fields">
-                  {state==="Sign Up"?<input type="text"placeholder="Your Name" name="username" value={formData.username} onChange={changeHandler}/>:<></>}
-                    <input name="email" value={formData.email} onChange={changeHandler} type="email"placeholder="Email Address" />
-                    <input name="password" value={formData.password} onChange={changeHandler} type="password" placeholder="Password" />
+                  {state==="Sign Up"?<input required type="text"placeholder="Your Name" name="username" value={formData.username} onChange={changeHandler}/>:<></>}
+                    <input required name="email" value={formData.email} onChange={changeHandler} type="email"placeholder="Email Address" />
+                    <input required name="password" value={formData.password} onChange={changeHandler} type="password" placeholder="Password" maxLength={10} />
                 
                 </div>
                 <button onClick={()=>{state==="Login"?login():signup()}} >Continue</button>
