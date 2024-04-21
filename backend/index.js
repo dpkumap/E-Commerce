@@ -3,20 +3,20 @@ const express = require('express');
 const app=express();//creating app instance
 const mongoose = require('mongoose');//using this we can use mongoDB
 const jwt = require('jsonwebtoken');//using this we can generate token nd verify it
-const multer = require('multer');//we can create img storage sys 
-const path=require('path');
-const cors=require('cors');
+const multer = require('multer');//we can create img storage sys for uupload endpoint
+const path=require('path');//
+const cors=require('cors');//provide access to react project
 const { type } = require('os');
 const { error, log } = require('console');
 
 
-app.use(express.json());
+app.use(express.json());//req parse using json method 
 app.use(cors());//connect ot express app using 4000 port
 
 //database connection with mongo db
 mongoose.connect("mongodb+srv://deepakumap4141:333725@cluster0.6klj2cb.mongodb.net/ecommerce");
 
-//api creation
+//api creation to check express app
 
 app.get("/",(req,res)=>{
 
@@ -34,9 +34,6 @@ const storage = multer.diskStorage({
         return cb(null,`${file.fieldname}_${Date.now()}_${path.extname(file.originalname)}`)
     }
 })
-
-//creating multer function
-
 
 const upload =multer({storage:storage})
 
@@ -100,7 +97,7 @@ const Product = mongoose.model("Product",{
 
 })
 
-//add product endpoint
+//add product endpoint API to store product in DB
 
 app.post('/addproduct',async (req,res)=>{
     let products= await Product.find({})
@@ -134,7 +131,7 @@ app.post('/addproduct',async (req,res)=>{
     })
 })
 
-//creating APi for deleting products 
+//creating APi for deleting products by taking product id 
 
 app.post('/removeproduct',async (req,res)=>{
 
@@ -148,7 +145,7 @@ app.post('/removeproduct',async (req,res)=>{
     })
 })
 
-//creating APi for getting all products
+//creating APi for getting all products to fetch all pro from DB
 app.get('/allproducts',async (req,res)=>{
 
     let products = await Product.find({});
@@ -186,7 +183,7 @@ const Users=mongoose.model('Users',{
     }
 })
 
-//creating APi(or endpoint) for registering user
+//creating APi(or endpoint) for registering user to create user account
 app.post('/signup',async (req,res)=>{
 
     let check=await Users.findOne({email:req.body.email})
@@ -275,11 +272,10 @@ app.get('/popularinwomen',async(req,res)=>{
 
     let products=await Product.find({category:"women"})//it will search for women category from all pro
     let popular_in_women=products.slice(0,4);
-    console.log("popular in women fetcg");
+    console.log("popular in women fetch");
     res.send(popular_in_women);
 })
 
-//creating middleware to fetch user
 
 // const fetchUser=async(req,res)=>{
 
@@ -301,6 +297,7 @@ app.get('/popularinwomen',async(req,res)=>{
 //     }
 
 // }
+//creating middleware to fetch user to convert auth-token in user id
 const fetchUser = async (req, res, next) => {
     const token = req.header('auth-token');
 
@@ -352,6 +349,8 @@ app.post('/getcart',fetchUser,async(req,res)=>{
     res.json(userData.cartData);
 })
 
+
+//to listen express app to run backend server
 app.listen(port,(error)=>{
 
     if(!error){
