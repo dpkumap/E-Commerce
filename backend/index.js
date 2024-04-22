@@ -270,7 +270,7 @@ app.get('/newcollections',async(req,res)=>{
 //creating  endpoint for popular in women section
 app.get('/popularinwomen',async(req,res)=>{
 
-    let products=await Product.find({category:"women"})//it will search for women category from all pro
+    let products=await Product.find({category:"men"})//it will search for women category from all pro
     let popular_in_women=products.slice(0,4);
     console.log("popular in women fetch");
     res.send(popular_in_women);

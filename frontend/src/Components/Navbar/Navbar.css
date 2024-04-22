@@ -6,6 +6,7 @@
     box-shadow: 0 1px 3px -2px black;
     align-items: center;
     /* border: 2px solid green; */
+    background: #F9F9F9;
 
 }
 .nav-logo{
@@ -17,7 +18,7 @@
 }
 .nav-logo p{
 
-    color :#171717;
+    color :#333333;
     font-size: 38px;
     font-weight: 600;
 
@@ -28,7 +29,7 @@
     align-items: center;
     list-style: none;
     gap: 50px;
-    color: #626262;
+    color: #333333;
     font-size: 20px;
     font-weight: 500;
 }
@@ -40,6 +41,7 @@
     justify-content: center;
     gap: 3px;
     cursor: pointer;
+    color: #333333;
 
 }
 .nav-menu hr{

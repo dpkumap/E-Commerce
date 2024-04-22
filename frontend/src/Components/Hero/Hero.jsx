@@ -2,10 +2,17 @@ import React from "react";
 import './Hero.css'
 import hand_icon from '../Assets/hand_icon.png'
 import arrow_icon from '../Assets/arrow.png'
-import hero_image from '../Assets/hero_image.png'
+// import hero_image from '../Assets/hero_image.png'
+import hero_image2 from '../Assets/hero_img55.jpg'
 
 const Hero=()=>{
 
+    const scrollToNewCollections = () => {
+        const element = document.getElementById("latestCollections");
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    };
     return(
 
         <div className="hero">
@@ -21,14 +28,15 @@ const Hero=()=>{
                 <p>For everyone</p>
                 </div>
             
-            <div className="hero-latest-btn">
+            <div className="hero-latest-btn"  onClick={scrollToNewCollections}>
                 <div>Latest Collections</div>
                 <img src={arrow_icon} alt="arrow" />
             </div>
+            
             </div>
             <div className="hero-right">
 
-                <img src={hero_image} alt="heroimg" />
+                <img src={hero_image2} alt="heroimg" />
             </div>
 
         </div>
