@@ -1,9 +1,11 @@
-import React from "react";
+// import React, { useEffect } from "react";
 import './Hero.css'
 import hand_icon from '../Assets/hand_icon.png'
 import arrow_icon from '../Assets/arrow.png'
 // import hero_image from '../Assets/hero_image.png'
 import hero_image2 from '../Assets/hero_img55.jpg'
+// import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 const Hero=()=>{
 
@@ -13,9 +15,11 @@ const Hero=()=>{
             element.scrollIntoView({ behavior: "smooth" });
         }
     };
+
+    
     return(
 
-        <div className="hero">
+        <div className="hero" data-aos="fade-down">
 
             <div className="hero-left">
                 <h2>NEW ARRIVALS ONLY</h2>

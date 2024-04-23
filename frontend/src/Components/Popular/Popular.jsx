@@ -2,20 +2,24 @@ import React, { useEffect, useState } from "react";
 import './Popular.css'
 // import data_product from '../Assets/data'
 import Item from "../Item/Item";
+// import AOS from 'aos'
+// import 'aos/dist/aos.css'
 const Popular=()=>{
 
     const[popularProduct,setPopularProduct]=useState([]);
 
     useEffect(()=>{
 
-        fetch('http://localhost:4000/popularinwomen')
+        fetch('http://localhost:4000/popularinmen')
         .then((response)=>response.json())
         .then((data)=>setPopularProduct(data));
+
+        
     },[])
 
     return (
 
-        <div className="popular">
+        <div className="popular" >
             <h1>POPULAR IN MENS</h1>
             <hr />
             <div className="popular-item">

@@ -42,7 +42,8 @@
     width: 200px;
     height: 6px;
     border-radius: 10px;
-    background: #252525;
+    background: #FFD700;
+    border: none;
 }
 
 @media (max-width:1280px) {

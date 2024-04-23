@@ -2,6 +2,7 @@
 
     display: flex;
     margin: 0px 170px;
+    /* background: linear-gradient(180deg,#F0F0F0,#e1ffea22 60%); */
 
 }
 .productdisplay-left{
@@ -109,8 +110,8 @@
     width: 198px;
     font-size: 1rem;
     font-weight: 600;
-    color: white;
-    background: #ff4141;
+    color: #333333;
+    background: #FFD700;
     margin-bottom: 22px;
     border: none;
     outline: none;

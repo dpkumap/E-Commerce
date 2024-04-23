@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     /* border: 2px solid green; */
+    background: linear-gradient(180deg,#F0F0F0,#e1ffea22 60%);;
 }
 
 .shop-category-banner {
@@ -35,7 +36,7 @@
 .shopcategory-products {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr)); /* Adjusted grid-template-columns */
-    gap: 20px;
+    /* gap: 10px; */
     /* max-width: 100vw;  */
     margin-top: 50px;
     /* margin-bottom: 50px; */
