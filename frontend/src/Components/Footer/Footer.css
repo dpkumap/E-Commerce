@@ -18,8 +18,9 @@
 }
 .footer-logo img{
 
-    width: 91px;
-    height: 91px;
+    width: 150px;
+    height: 108px;
+    object-fit: contain;
 }
 .footer-logo p{
 
@@ -43,7 +44,13 @@
 
     cursor: pointer;
 
+
 }
+.footer-links li:hover{
+
+    color: #FFD700;
+}
+
 .footer-social-icon{
 
     display: flex;
@@ -56,6 +63,11 @@
     background: #fbfbfb;
     border: 1px solid #ebebeb;
     cursor: pointer;
+    border-radius: 6px;
+}
+.footer-icons-container:hover{
+
+    background: #FFD700;
 }
 .footer-copyright{
 

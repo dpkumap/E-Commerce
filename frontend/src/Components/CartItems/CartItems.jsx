@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import './CartItems.css'
 import { ShopContext } from "../../Context/ShopContext";
 import remove_icon from '../Assets/cart_cross_icon.png'
- 
+import 'aos/dist/aos.css'
 
 
 const CartItems=()=>{
@@ -10,7 +10,7 @@ const CartItems=()=>{
     const {getTotalCartAmount,all_product,cartItems,removeFromCart}=useContext(ShopContext);
     return(
 
-        <div className="cartitems">
+        <div className="cartitems" data-aos="fade-up">
             <div className="cartitems-format-main">
                 <p>Products</p>
                 <p>Title</p>

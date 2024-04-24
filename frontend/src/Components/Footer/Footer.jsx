@@ -1,17 +1,20 @@
 import React from "react";
 import './Footer.css'
-import footer_logo from '../Assets/logo3.png'
+import footer_logo from '../Assets/logo34.png'
 import instagram_icon from '../Assets/instagram_icon.png'
 import pinterest_icon from '../Assets/pintester_icon.png'
 import whatsapp_icon from '../Assets/whatsapp_icon.png'
+import 'aos/dist/aos.css'
+import { Link } from "react-router-dom";
+
 const Footer = ()=>{
 
     return(
 
-        <div className="footer">
+        <div className="footer" data-aos="fade-up">
             <div className="footer-logo">
-                <img src={footer_logo} alt="shopLogo" />
-                <p>CROWNMODE</p>
+            <Link style={{textDecoration:'none'}} to='/'><img src={footer_logo} alt="shopLogo" /></Link>
+                <p></p>
             </div>
             <ul className="footer-links">
                 <li>Company</li>
@@ -22,13 +25,13 @@ const Footer = ()=>{
             </ul>
             <div className="footer-social-icon">
                 <div className="footer-icons-container">
-                    <img src={instagram_icon} alt="insta logo" />
+                <Link style={{textDecoration:'none'}} to='https://www.instagram.com/'> <img src={instagram_icon} alt="insta logo" /></Link>
                 </div>
                 <div className="footer-icons-container">
-                <img src={pinterest_icon} alt="pinterest Icon" />
+                <Link style={{textDecoration:'none'}} to='https://in.pinterest.com/'><img src={pinterest_icon} alt="pinterest Icon" /></Link>
                 </div>
                 <div className="footer-icons-container">
-                <img src={whatsapp_icon} alt="Whatsapp Icon" />
+                <Link style={{textDecoration:'none'}} to='https://web.whatsapp.com/'> <img src={whatsapp_icon} alt="Whatsapp Icon" /></Link>
                 </div>
             </div>
             <div className="footer-copyright">

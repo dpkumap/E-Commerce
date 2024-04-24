@@ -19,7 +19,7 @@ const Hero=()=>{
     
     return(
 
-        <div className="hero" data-aos="fade-down">
+        <div className="hero" data-aos="fade-up">
 
             <div className="hero-left">
                 <h2>NEW ARRIVALS ONLY</h2>

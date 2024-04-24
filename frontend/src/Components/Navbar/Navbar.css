@@ -6,36 +6,45 @@
     box-shadow: 0 1px 3px -2px black;
     align-items: center;
     /* border: 2px solid green; */
-    background: #F9F9F9;
-
+    /* background: #FFD700; */
+    height: 12vh;
+    
 }
 .nav-logo{
 
     display: flex;
     align-items: center;
-    gap: 50px;
+    /* justify-content: space-betw; */
+    /* gap: 50px; */
+    column-gap: 50px;
+    
 
 }
 .logoimg{
 
    
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
 }
 .nav-logo p{
 
-    color :#FFD700;
+    color :#333333;
     font-size: 38px;
     font-weight: 600;
 
+}
+#mode{
+
+    color: #FFD700;
 }
 .nav-menu{
 
     display: flex;
     align-items: center;
     list-style: none;
-    gap: 50px;
+    /* gap: 60px; */
+    column-gap: 60px;
     color: #333333;
     font-size: 20px;
     font-weight: 500;

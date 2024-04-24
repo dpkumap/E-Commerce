@@ -5,6 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ShopContextProvider from './Context/ShopContext';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+// Initialize AOS
+AOS.init({ duration: 1700 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

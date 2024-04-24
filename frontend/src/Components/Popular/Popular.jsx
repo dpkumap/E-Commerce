@@ -3,7 +3,7 @@ import './Popular.css'
 // import data_product from '../Assets/data'
 import Item from "../Item/Item";
 // import AOS from 'aos'
-// import 'aos/dist/aos.css'
+import 'aos/dist/aos.css'
 const Popular=()=>{
 
     const[popularProduct,setPopularProduct]=useState([]);
@@ -19,8 +19,8 @@ const Popular=()=>{
 
     return (
 
-        <div className="popular" >
-            <h1>POPULAR IN MENS</h1>
+        <div className="popular" data-aos="fade-up" >
+            <h1 data-aos="fade-down">POPULAR IN MENS</h1>
             <hr />
             <div className="popular-item">
 

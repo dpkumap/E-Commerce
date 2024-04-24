@@ -10,7 +10,9 @@
 }
 .nav-logo{
 
-    width: 190px;
+    width: 200px;
+    height: 55px;
+    object-fit: contain;
 
 }
 .nav-profile{

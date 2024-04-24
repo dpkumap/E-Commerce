@@ -1,12 +1,13 @@
 import React from "react";
 import './Item.css'
 import { Link } from "react-router-dom";
+import 'aos/dist/aos.css'
 const Item=(props)=>{
 
     // console.log("from itemss :"+props.id);
     return (
         
-        <div className="item">
+        <div className="item" data-aos="fade-up">
            <Link to={`/product/${props.id}`}><img onClick={window.scrollTo(0,0)} src={props.image} alt="productimgs" /></Link>
             <p>{props.name}</p>
             <div className="item-prices">

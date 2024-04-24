@@ -3,16 +3,29 @@ import './CSS/ShopCategory.css'
 import { ShopContext } from "../Context/ShopContext";
 import dropdown_icon from '../Components/Assets/dropdown_icon.png'
 import Item from '../Components/Item/Item'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 
 const ShopCategory= (props) =>{
     // using context accessing data
     const {all_product}=useContext(ShopContext);
+    const location = useLocation(); 
+    useEffect(() => {
+        // Reinitialize AOS whenever the location changes
+        AOS.init({
+            duration: 1500,
+            // Add other AOS options if needed
+        });
+    }, [location]);
+
 
     return (
 
-        <div className="shop-category">
+        <div className="shop-category" >
 
-            <img className="shop-category-banner" src={props.banner} alt="category banner" />
+            <img className="shop-category-banner" src={props.banner} alt="category banner" data-aos="fade-down" />
             <div className="shopCategory-indexSort">
                 <p>
                     <span>Showing 1-12</span> out of 36 products
@@ -23,7 +36,7 @@ const ShopCategory= (props) =>{
             </div>
             {/* mapping the diff category products  */}
 
-            <div className="shopcategory-products">
+            <div className="shopcategory-products" data-aos="fade-up">
                 {all_product.map((item,index)=>{
                     if(props.category===item.category){
 

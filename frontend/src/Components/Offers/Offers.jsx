@@ -1,12 +1,13 @@
 import React from "react";
 import './Offers.css'
+import 'aos/dist/aos.css'
 import exclusive_img from '../Assets/exclusive_image2.jpg'
 const Offers=()=>{
 
 
     return (
 
-        <div className="offers">
+        <div className="offers" data-aos="fade-up">
             <div className="offers-left">
                 <h1>Exclusive</h1>
                 <h1>Offers For You</h1>

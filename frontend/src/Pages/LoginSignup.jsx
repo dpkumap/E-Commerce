@@ -1,6 +1,7 @@
 import React from "react";
 import './CSS/LoginSignup.css'
 import { useState } from "react";
+import 'aos/dist/aos.css'
 
 const LoginSignup = () =>{
 
@@ -85,7 +86,7 @@ const LoginSignup = () =>{
 
         <div className="loginsignup">
 
-            <div className="loginsignup-container">
+            <div className="loginsignup-container" data-aos="fade-up">
                 <h1>{state}</h1>
                 <div className="loginsignup-fields">
                   {state==="Sign Up"?<input required type="text"placeholder="Your Name" name="username" value={formData.username} onChange={changeHandler}/>:<></>}

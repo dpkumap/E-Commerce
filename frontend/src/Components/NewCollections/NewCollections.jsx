@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './NewCollections.css';
 // import new_collection from '../Assets/new_collections';
 import Item from '../Item/Item';
+import 'aos/dist/aos.css'
 
 const NewCollections = () => {
 
@@ -17,7 +18,7 @@ const NewCollections = () => {
     },[])
 
     return (
-        <div className="new-collections" id="latestCollections">
+        <div className="new-collections" id="latestCollections" data-aos="fade-up">
             <h1>NEW COLLECTIONS</h1>
             <hr />
             <div className="collections">
