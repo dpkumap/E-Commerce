@@ -128,3 +128,25 @@
 
 
 }
+@media (max-width:500px){
+
+    .footer{
+
+        gap: 15px;
+    }
+   
+    .footer-logo img{
+
+        width: 100px;
+        object-fit: contain;
+
+    }
+    .footer-links{
+
+        font-size: 14px;
+        /* gap:10px; */
+        column-gap: 10px;
+        row-gap: 0px;
+    }
+
+}

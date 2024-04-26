@@ -171,11 +171,19 @@
 @media (max-width:500px){
 
     .offers{
-
-        
-        margin-bottom: 50px;
+        padding: 0px 10px;
+        height: 24vh;
+        margin-bottom: 5px;
         /* height: 25vh; */
 
+    }
+    .offers-left{
+
+       
+        justify-content: center;
+        align-items: flex-start;
+    
+    
     }
     .offers-left h1{
 
@@ -188,7 +196,9 @@
     }
     .offers-right img{
 
-        width: 120px;
+        width: 100px;
+        height: auto;
+        object-fit: contain;
 
     }
     .offers-left button{
@@ -196,6 +206,7 @@
         width: 120px;
         height: 25px;
         font-size: 10px;
+        margin-top: 5px;
     }
  
 }

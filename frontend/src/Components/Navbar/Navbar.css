@@ -196,6 +196,7 @@
     .navbar{
 
         padding: 10px 0px;
+        gap: 100px;
         /* width: 600px; */
 
     }
@@ -211,11 +212,12 @@
 
         display: none;
         height: 80px;
-        width: 100%;
+        width: auto;
         position: absolute;
         background-color: white;
         justify-content: center;
-        top:50px;
+        top:88px;
+        color: red;
     } 
     .nav-menu-visible{
 
@@ -235,18 +237,23 @@
       /* width: 1100px; */
       /* width: 900px; */
       /* border: 1px solid green;   */
-      gap: 0;
+      gap: 40px;
 
     }
     .nav-logo{
 
-        transform: scale(0.5);
+        transform: scale(0.8);
     }
     .nav-menu{
 
-        height: 70px;
-        top: 50px;
+        height: 50px;
+        top: 60px;
 
+    }
+    .nav-dropdown{
+
+        align-self: center;
+        
     }
     .nav-login-cart{
 
