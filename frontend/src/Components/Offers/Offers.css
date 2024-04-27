@@ -142,7 +142,7 @@
     .offers{
 
         
-        margin-bottom: 60px;
+        margin-bottom: 50px;
         
 
     }
@@ -172,8 +172,9 @@
 
     .offers{
         padding: 0px 10px;
-        height: 24vh;
-        margin-bottom: 5px;
+        height: 17vh;
+        margin-bottom: 50px;
+        margin-top: 0px;
         /* height: 25vh; */
 
     }

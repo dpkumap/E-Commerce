@@ -3,7 +3,8 @@
     height: 89vh;
     background: linear-gradient(180deg,#F0F0F0,#e1ffea22 60%);
     display: flex;
-    
+    /* position: relative;
+    z-index:-1;  */
     margin-bottom: 50px;
     /* border: 2px solid rebeccapurple; */
 
@@ -199,6 +200,10 @@
     .hero{
 
         flex-direction: column;
+        height: 81vh;
+        position: relative;
+    z-index:-1; 
+        /* background: #333333; */
     }
     .hero-right{
 

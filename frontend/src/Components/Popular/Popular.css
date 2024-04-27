@@ -139,7 +139,8 @@
 
     .popular{
 
-        height: 90vh;
+        height: auto;
+        margin-bottom: 50px;
         /* gap: 6px; */
 
     }
@@ -149,6 +150,9 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
+        /* border: 2px solid green; */
+        /* margin-top: 0px; */
+        margin-bottom: 0px;
         /* max-width: 100vw; */
 
     }

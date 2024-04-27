@@ -22,9 +22,6 @@ const Navbar =()=>{
         <div className='navbar' data-aos="fade-down">
 
         <div className='nav-logo'>
-        
-        
-        
         <p></p>
         <></>
         <Link style={{textDecoration:'none'}} to='/'><img className='logoimg' src={logo} alt="ourlogo" /></Link>
