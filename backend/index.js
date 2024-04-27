@@ -13,6 +13,8 @@ const { error, log } = require('console');
 app.use(express.json());//req parse using json method 
 app.use(cors());//connect ot express app using 4000 port
 
+
+
 //database connection with mongo db
 mongoose.connect("mongodb+srv://deepakumap4141:333725@cluster0.6klj2cb.mongodb.net/ecommerce");
 
