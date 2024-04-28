@@ -9,12 +9,14 @@ const cors=require('cors');//provide access to react project
 const { type } = require('os');
 const { error, log } = require('console');
 
-app.use(express.static(path.join(__dirname,"./frontend/build")));
+// app.use(express.static(path.join(__dirname, '..','frontend', 'build')));
 
-app.get("*",(req,res)=>{
+// // Your other routes and middleware...
 
-    res.sendFile(path.join(__dirname,"./frontend/build/index.html"))
-})
+// // Route for serving index.html
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '..',  'frontend', 'build', 'index.html'));
+// });
 
 const port=process.env.PORT || 4000;
 app.use(express.json());//req parse using json method 
@@ -281,7 +283,7 @@ app.get('/popularinmen',async(req,res)=>{
 
     let products=await Product.find({category:"men"})//it will search for men category from all pro
     let popular_in_women=products.slice(0,4);
-    console.log("popular in men fetch");
+    // console.log("popular in men fetch");
     res.send(popular_in_women);
 })
 

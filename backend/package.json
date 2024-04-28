@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "server":"nodemon server.js",
+    "client": "npm start --prefix D:/E-Commerce/frontend",
+    "dev": "concurrently \"npm start\" \"npm run client\""
+
   },
   "author": "",
   "license": "ISC",
@@ -14,5 +19,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.2",
     "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
