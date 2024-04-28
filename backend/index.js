@@ -1,4 +1,4 @@
-const port=4000;
+
 const express = require('express');
 const app=express();//creating app instance
 const mongoose = require('mongoose');//using this we can use mongoDB
@@ -9,14 +9,16 @@ const cors=require('cors');//provide access to react project
 const { type } = require('os');
 const { error, log } = require('console');
 
+app.use(express.static(path.join(__dirname,"./frontend/build")));
 
+app.get("*",(req,res)=>{
+
+    res.sendFile(path.join(__dirname,"./frontend/build/index.html"))
+})
+
+const port=process.env.PORT || 4000;
 app.use(express.json());//req parse using json method 
-app.use(cors({
-
-    origin:["https://ecommerce-1whq.vercel.app"],
-    methods:["POST","GET"],
-    credentials:true
-}));//connect ot express app using 4000 port
+app.use(cors());//connect ot express app using 4000 port
 
 
 
@@ -128,9 +130,9 @@ app.post('/addproduct',async (req,res)=>{
         old_price:req.body.old_price,
 
     });
-    console.log(product)
+    // console.log(product)
     await product.save();
-    console.log("saved pro");
+    // console.log("saved pro");
     res.json({
 
         success:true,
@@ -143,7 +145,7 @@ app.post('/addproduct',async (req,res)=>{
 app.post('/removeproduct',async (req,res)=>{
 
     await Product.findOneAndDelete({id:req.body.id});
-    console.log("Removed Pro");
+    // console.log("Removed Pro");
     res.json({
 
         success:true,
@@ -157,7 +159,7 @@ app.get('/allproducts',async (req,res)=>{
 
     let products = await Product.find({});
 
-    console.log("all products fetched");
+    // console.log("all products fetched");
 
     res.send(products);
 })
@@ -269,7 +271,7 @@ app.get('/newcollections',async(req,res)=>{
 
     let products=await Product.find({});
     let newcollection=products.slice(1).slice(-8);
-    console.log("new Collection fetch");
+    // console.log("new Collection fetch");
     res.send(newcollection);
 
 })
@@ -284,27 +286,6 @@ app.get('/popularinmen',async(req,res)=>{
 })
 
 
-
-// const fetchUser=async(req,res)=>{
-
-//     const token=req.header('auth-token');
-
-//     if(!token){
-
-//         res.status(401).send({errors:"Please Authenticate using valid token"});
-
-//     }else{
-
-//         try{
-//             const data=jwt.verify(token,'secret_ecom');
-//             req.user=data.user;
-//             next();
-//         }catch(error){
-//             res.status(401).send({erorrs:'please authenticate using valid token'})
-//         }
-//     }
-
-// }
 //creating middleware to fetch user to convert auth-token in user id
 const fetchUser = async (req, res, next) => {
     const token = req.header('auth-token');
@@ -326,7 +307,7 @@ const fetchUser = async (req, res, next) => {
 
 app.post('/addtocart',fetchUser,async (req,res)=>{
 
-    console.log("added",req.body.itemId);
+    // console.log("added",req.body.itemId);
     // console.log(req.body,req.user);
     let userData=await Users.findOne({_id:req.user.id});
     userData.cartData[req.body.itemId] += 1;
@@ -363,10 +344,10 @@ app.listen(port,(error)=>{
 
     if(!error){
 
-        console.log('server runing on port '+port)
+        // console.log('server runing on port '+port)
     }else{
 
-        console.log("error : "+error);
+        // console.log("error : "+error);
     }
 })
 

@@ -22,7 +22,7 @@ const LoginSignup = () =>{
     
     const login=async ()=>{
 
-        console.log("login called",formData);
+        // console.log("login called",formData);
         try {
             let responseData;
             await fetch('http://localhost:4000/login', {
@@ -47,7 +47,7 @@ const LoginSignup = () =>{
                 alert(responseData.errors);
             }
         } catch (error) {
-            console.error("Error during Login:", error);
+            // console.error("Error during Login:", error);
         }
     }
     const signup = async () => {
@@ -76,7 +76,7 @@ const LoginSignup = () =>{
                 alert(responseData.errors);
             }
         } catch (error) {
-            console.error("Error during signup:", error);
+            // console.error("Error during signup:", error);
         }
     };
     

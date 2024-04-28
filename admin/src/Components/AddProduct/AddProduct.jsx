@@ -70,7 +70,7 @@ const AddProduct=()=>{
             if (responseData.success) {
                 const updatedProductDetails = { ...productDetails, image: responseData.image_url };
                 setProductDetails(updatedProductDetails);
-                console.log(updatedProductDetails);
+                // console.log(updatedProductDetails);
                 await fetch('http://localhost:4000/addproduct',{
                     method:"POST",
                     headers:{
@@ -82,10 +82,10 @@ const AddProduct=()=>{
                      data.success?alert("Product Added"):alert("Failed")
                 })
             } else {
-                console.log("Nothing");
+                // console.log("Nothing");
             }
         } catch (error) {
-            console.error('Error occurred during image upload:', error);
+            // console.error('Error occurred during image upload:', error);
         }
     };
     
