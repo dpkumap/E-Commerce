@@ -11,7 +11,12 @@ const { error, log } = require('console');
 
 
 app.use(express.json());//req parse using json method 
-app.use(cors());//connect ot express app using 4000 port
+app.use(cors({
+
+    origin:["https://ecommerce-1whq.vercel.app"],
+    methods:["POST","GET"],
+    credentials:true
+}));//connect ot express app using 4000 port
 
 
 
