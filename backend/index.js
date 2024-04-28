@@ -9,14 +9,14 @@ const cors=require('cors');//provide access to react project
 const { type } = require('os');
 const { error, log } = require('console');
 
-// app.use(express.static(path.join(__dirname, '..','frontend', 'build')));
+app.use(express.static(path.join(__dirname,'./frontend', 'build')));
 
-// // Your other routes and middleware...
+// Your other routes and middleware...
 
-// // Route for serving index.html
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '..',  'frontend', 'build', 'index.html'));
-// });
+// Route for serving index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,'./frontend', 'build', 'index.html'));
+});
 
 const port=process.env.PORT || 4000;
 app.use(express.json());//req parse using json method 
