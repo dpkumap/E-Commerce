@@ -214,11 +214,11 @@
 
         display: none;
         height: 80px;
-        width: 100%;
-        position: absolute;
+        width: 100%;   
         background-color: white;
         justify-content: center;
-        top:88px;
+        position: absolute;
+        top: calc(4px + 70px);
         /* color: red; */
     } 
     .nav-menu-visible{

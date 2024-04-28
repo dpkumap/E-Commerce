@@ -163,6 +163,11 @@
  }
  @media (max-width:800px){
 
+    .hero{
+
+        position: relative;
+        z-index:-1; 
+    }
     .hero-left{
  
          padding-left: 30px;

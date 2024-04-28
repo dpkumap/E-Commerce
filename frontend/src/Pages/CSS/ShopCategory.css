@@ -193,7 +193,7 @@
     .shop-category-banner{
 
         /* margin:20px auto; */
-        margin-top: 40px;
+        margin-top: 55px;
         width: 82%;
 
     }
@@ -207,6 +207,7 @@
 
       max-width: 82%;
       column-gap: 30px;
+      row-gap: 0px;
 
        }
    
