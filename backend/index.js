@@ -8,19 +8,16 @@ const path=require('path');//
 const cors=require('cors');//provide access to react project
 const { type } = require('os');
 const { error, log } = require('console');
+require("dotenv").config();
 
-app.use(express.static(path.join(__dirname,'./frontend', 'build')));
+const port = process.env.PORT || 4000;
 
-// Your other routes and middleware...
 
-// Route for serving index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname,'./frontend', 'build', 'index.html'));
-});
 
-const port=process.env.PORT || 4000;
+
 app.use(express.json());//req parse using json method 
 app.use(cors());//connect ot express app using 4000 port
+
 
 
 
@@ -31,7 +28,7 @@ mongoose.connect("mongodb+srv://deepakumap4141:333725@cluster0.6klj2cb.mongodb.n
 
 app.get("/",(req,res)=>{
 
-    res.send("express app is runnig ");
+    res.json({ message: "express app is running" });
 
 })
 
@@ -133,13 +130,23 @@ app.post('/addproduct',async (req,res)=>{
 
     });
     // console.log(product)
-    await product.save();
-    // console.log("saved pro");
-    res.json({
+    // await product.save();
+    // // console.log("saved pro");
+    // res.json({
 
-        success:true,
-        name:req.body.name,
-    })
+    //     success:true,
+    //     name:req.body.name,
+    // })
+    try {
+        await product.save();
+        res.json({
+          success: true,
+          name: req.body.name, // Assuming 'name' is a property in the request body
+        });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, errors: "Error adding product" });
+      }
 })
 
 //creating APi for deleting products by taking product id 
@@ -163,7 +170,7 @@ app.get('/allproducts',async (req,res)=>{
 
     // console.log("all products fetched");
 
-    res.send(products);
+    res.json(products);
 })
 
 //creating users Schema
@@ -274,7 +281,7 @@ app.get('/newcollections',async(req,res)=>{
     let products=await Product.find({});
     let newcollection=products.slice(1).slice(-8);
     // console.log("new Collection fetch");
-    res.send(newcollection);
+    res.json(newcollection);
 
 })
 
@@ -284,7 +291,7 @@ app.get('/popularinmen',async(req,res)=>{
     let products=await Product.find({category:"men"})//it will search for men category from all pro
     let popular_in_women=products.slice(0,4);
     // console.log("popular in men fetch");
-    res.send(popular_in_women);
+    res.json(popular_in_women);
 })
 
 
@@ -322,7 +329,7 @@ app.post('/addtocart',fetchUser,async (req,res)=>{
 
 app.post('/removefromcart',fetchUser,async (req,res)=>{
 
-    console.log("removed",req.body.itemId);
+    // console.log("removed",req.body.itemId);
     let userData=await Users.findOne({_id:req.user.id});
     if(userData.cartData[req.body.itemId]>0)
     userData.cartData[req.body.itemId] -= 1;
@@ -332,13 +339,22 @@ app.post('/removefromcart',fetchUser,async (req,res)=>{
 
 //creating endpoint to get cart data
 
-app.post('/getcart',fetchUser,async(req,res)=>{
+// app.post('/getcart',fetchUser,async(req,res)=>{
 
-    console.log("get cart");
+//     console.log("get cart");
 
-    let userData=await Users.findOne({_id:req.user.id})
-    res.json(userData.cartData);
-})
+//     let userData=await Users.findOne({_id:req.user.id})
+//     res.json(userData.cartData);
+// })
+app.post('/getcart', fetchUser, async (req, res) => {
+    try {
+      const userData = await Users.findOne({ _id: req.user.id });
+      res.json(userData.cartData);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, errors: "Error fetching cart data" });
+    }
+  });
 
 
 //to listen express app to run backend server
