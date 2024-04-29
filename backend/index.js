@@ -48,21 +48,18 @@ const cors = require('cors');
 
 const PORT = process.env.PORT || 4000; // Assign PORT variable here
 
-const corsOptions = {
-    origin: "https://crownmode-e-commerce-qeoi.onrender.com" // frontend URI (ReactJS)
-};
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 const url=process.env.MONGODB_URL;
 
 mongoose.connect(url).then(() => {
     // Don't reassign PORT here, use it directly
     app.listen(PORT, () => {
-        // console.log(`App is Listening on PORT ${PORT}`);
+        console.log(`App is Listening on PORT ${PORT}`);
     });
 }).catch(err => {
-    // console.log(err);
+    console.log(err);
 });
 
 // Rest of your code...
