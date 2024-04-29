@@ -49,7 +49,7 @@ const cors = require('cors');
 const PORT = process.env.PORT || 4000; // Assign PORT variable here
 
 const corsOptions = {
-    origin: "http://localhost:3000" // frontend URI (ReactJS)
+    origin: "https://crownmode-e-commerce-qeoi.onrender.com" // frontend URI (ReactJS)
 };
 app.use(express.json());
 app.use(cors(corsOptions));
