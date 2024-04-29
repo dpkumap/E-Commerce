@@ -1,28 +1,73 @@
 
-const express = require('express');
-const app=express();//creating app instance
-const mongoose = require('mongoose');//using this we can use mongoDB
-const jwt = require('jsonwebtoken');//using this we can generate token nd verify it
-const multer = require('multer');//we can create img storage sys for uupload endpoint
-const path=require('path');//
-const cors=require('cors');//provide access to react project
-const { type } = require('os');
-const { error, log } = require('console');
+// const express = require('express');
+// const app=express();//creating app instance
+// const mongoose = require('mongoose');//using this we can use mongoDB
+// const jwt = require('jsonwebtoken');//using this we can generate token nd verify it
+// const multer = require('multer');//we can create img storage sys for uupload endpoint
+// const path=require('path');//
+// const cors=require('cors');//provide access to react project
+// const { type } = require('os');
+// const { error, log } = require('console');
+// require("dotenv").config();
+
+// // const port = process.env.PORT || 4000;
+
+
+
+
+// // // app.use(express.json());//req parse using json method 
+// // // app.use(cors());//connect ot express app using 4000 port
+
+// // //database connection with mongo db
+// // mongoose.connect("mongodb+srv://deepakumap4141:333725@cluster0.6klj2cb.mongodb.net/ecommerce");
+// const PORT = process.env.PORT || 4000
+// const corsOptions = {
+//     origin: "http://localhost:3000" // frontend URI (ReactJS)
+// }
+// app.use(express.json());
+// app.use(cors(corsOptions));
+
+// // connect MongoDB
+// mongoose.connect(process.env.MONGODB_URL).then(() => {
+//     PORT = process.env.PORT || 4000
+//     app.listen(PORT, () => {
+//         console.log(`App is Listening on PORT ${PORT}`);
+//     })
+// }).catch(err => {
+//     console.log(err);
+// });
 require("dotenv").config();
-
-const port = process.env.PORT || 4000;
-
-
-
-
-app.use(express.json());//req parse using json method 
-app.use(cors());//connect ot express app using 4000 port
-
+const express = require('express');
+const app = express(); // creating app instance
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const multer = require('multer');
+const path = require('path');
+const cors = require('cors');
 
 
+const PORT = process.env.PORT || 4000; // Assign PORT variable here
 
-//database connection with mongo db
-mongoose.connect("mongodb+srv://deepakumap4141:333725@cluster0.6klj2cb.mongodb.net/ecommerce");
+const corsOptions = {
+    origin: "http://localhost:3000" // frontend URI (ReactJS)
+};
+app.use(express.json());
+app.use(cors(corsOptions));
+
+const url=process.env.MONGODB_URL;
+
+mongoose.connect(url).then(() => {
+    // Don't reassign PORT here, use it directly
+    app.listen(PORT, () => {
+        // console.log(`App is Listening on PORT ${PORT}`);
+    });
+}).catch(err => {
+    // console.log(err);
+});
+
+// Rest of your code...
+
+
 
 //api creation to check express app
 
@@ -53,7 +98,7 @@ app.post("/upload",upload.single('product'),(req,res)=>{
 
     res.json({
         success:1,
-        image_url:`http://localhost:${port}/images/${req.file.filename}`
+        image_url:`http://localhost:${PORT}/images/${req.file.filename}`
     })
 })
 
@@ -358,14 +403,5 @@ app.post('/getcart', fetchUser, async (req, res) => {
 
 
 //to listen express app to run backend server
-app.listen(port,(error)=>{
 
-    if(!error){
-
-        // console.log('server runing on port '+port)
-    }else{
-
-        // console.log("error : "+error);
-    }
-})
 
