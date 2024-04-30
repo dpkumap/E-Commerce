@@ -49,7 +49,14 @@ const cors = require('cors');
 const PORT = process.env.PORT || 4000; // Assign PORT variable here
 
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+    origin: 'https://crownmode-fe.onrender.com',
+  };
+  
+  app.use(cors(corsOptions));
+  
+// app.use(cors());
 
 const url=process.env.MONGODB_URL;
 
