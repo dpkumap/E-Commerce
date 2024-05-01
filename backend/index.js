@@ -46,15 +46,28 @@ const path = require('path');
 const cors = require('cors');
 
 
+
+const allowedOrigins = [
+    'https://crownmode-fe.onrender.com', // Frontend URL 1
+    'https://admin-panel-phi1.onrender.com', // Frontend URL 2
+    // Add more origins as needed
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+};
+
+app.use(cors(corsOptions));
+
 const PORT = process.env.PORT || 4000; // Assign PORT variable here
 
 app.use(express.json());
-
-const corsOptions = {
-    origin: 'https://crownmode-fe.onrender.com',
-  };
-  
-  app.use(cors(corsOptions));
   
 // app.use(cors());
 
