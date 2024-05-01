@@ -10,7 +10,7 @@ const Popular=()=>{
 
     useEffect(()=>{
 
-        fetch('http://localhost:4000/popularinmen')
+        fetch('https://crownmode-be.onrender.com/popularinmen')
         .then((response)=>response.json())
         .then((data)=>setPopularProduct(data));
 

@@ -56,7 +56,7 @@ const AddProduct=()=>{
             let formData = new FormData();
             formData.append('product', image);
     
-            const response = await fetch('http://localhost:4000/upload', {
+            const response = await fetch('https://crownmode-be.onrender.com/upload', {
                 method: 'POST',
                 body: formData,
             });
@@ -71,7 +71,7 @@ const AddProduct=()=>{
                 const updatedProductDetails = { ...productDetails, image: responseData.image_url };
                 setProductDetails(updatedProductDetails);
                 // console.log(updatedProductDetails);
-                await fetch('http://localhost:4000/addproduct',{
+                await fetch('https://crownmode-be.onrender.com/addproduct',{
                     method:"POST",
                     headers:{
                         Accept:"application/json",

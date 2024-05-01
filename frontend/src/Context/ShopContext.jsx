@@ -22,13 +22,13 @@ const ShopContextProvider=(props)=>{
     
     useEffect(()=>{
 
-        fetch('http://localhost:4000/allproducts')
+        fetch('https://crownmode-be.onrender.com/allproducts')
         .then((response)=>response.json())
         .then((data)=>setAll_Product(data))
 
         if(localStorage.getItem('auth-token')){
 
-            fetch('http://localhost:4000/getcart',{
+            fetch('https://crownmode-be.onrender.com/getcart',{
 
                 method:"POST",
                 headers:{
@@ -53,7 +53,7 @@ const ShopContextProvider=(props)=>{
             // console.log(updatedCart); // Log the updated cart
             if(localStorage.getItem('auth-token')){
                 
-                fetch('http://localhost:4000/addtocart',{
+                fetch('https://crownmode-be.onrender.com/addtocart',{
 
                     method:"POST",
                     headers:{
@@ -78,7 +78,7 @@ const ShopContextProvider=(props)=>{
 
         if(localStorage.getItem('auth-token')){
 
-            fetch('http://localhost:4000/removefromcart',{
+            fetch('https://crownmode-be.onrender.com/removefromcart',{
 
             method:"POST",
             headers:{
