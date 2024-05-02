@@ -357,20 +357,6 @@ app.get('/popularinmen',async(req,res)=>{
 })
 
     
-app.get('/relatedproducts/:category', async (req, res) => {
-    const { category } = req.params;
-
-    try {
-        // Query the database for related products based on the category
-        const relatedProducts = await Product.find({ category }).limit(4);
-
-        // Send the related products as a response
-        res.json(relatedProducts);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
 
 //creating middleware to fetch user to convert auth-token in user id
 const fetchUser = async (req, res, next) => {
