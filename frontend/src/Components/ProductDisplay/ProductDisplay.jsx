@@ -87,12 +87,9 @@ const ProductDisplay =(props)=>{
             addToCart(product.id);
         } else {
             // Trigger AOS animation for the button click
-            window.dispatchEvent(new Event("scroll"));
+            window.location.href = "/login"; 
     
-            // Delay the redirection to allow time for AOS animation to complete
-            setTimeout(() => {
-                window.location.href = "/login"; // Change "/login" to the actual path of your login page
-            }, 500); // Adjust the delay time as needed
+           // Adjust the delay time as needed
         }
     };
     
