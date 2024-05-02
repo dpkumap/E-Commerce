@@ -1,41 +1,4 @@
 
-// const express = require('express');
-// const app=express();//creating app instance
-// const mongoose = require('mongoose');//using this we can use mongoDB
-// const jwt = require('jsonwebtoken');//using this we can generate token nd verify it
-// const multer = require('multer');//we can create img storage sys for uupload endpoint
-// const path=require('path');//
-// const cors=require('cors');//provide access to react project
-// const { type } = require('os');
-// const { error, log } = require('console');
-// require("dotenv").config();
-
-// // const port = process.env.PORT || 4000;
-
-
-
-
-// // // app.use(express.json());//req parse using json method 
-// // // app.use(cors());//connect ot express app using 4000 port
-
-// // //database connection with mongo db
-// // mongoose.connect("mongodb+srv://deepakumap4141:333725@cluster0.6klj2cb.mongodb.net/ecommerce");
-// const PORT = process.env.PORT || 4000
-// const corsOptions = {
-//     origin: "http://localhost:3000" // frontend URI (ReactJS)
-// }
-// app.use(express.json());
-// app.use(cors(corsOptions));
-
-// // connect MongoDB
-// mongoose.connect(process.env.MONGODB_URL).then(() => {
-//     PORT = process.env.PORT || 4000
-//     app.listen(PORT, () => {
-//         console.log(`App is Listening on PORT ${PORT}`);
-//     })
-// }).catch(err => {
-//     console.log(err);
-// });
 require("dotenv").config();
 const express = require('express');
 const app = express(); // creating app instance
@@ -47,6 +10,40 @@ const cors = require('cors');
 
 
 
+// const allowedOrigins = [
+//     'https://crownmode-fe.onrender.com', // Frontend URL 1
+//     'https://admin-panel-phi1.onrender.com', // Frontend URL 2
+//     // Add more origins as needed
+// ];
+
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     }
+// };
+
+// app.use(cors(corsOptions));
+
+// const PORT = process.env.PORT || 4000; // Assign PORT variable here
+
+// app.use(express.json());
+  
+// // app.use(cors());
+
+// const url=process.env.MONGODB_URL;
+
+// mongoose.connect(url).then(() => {
+//     // Don't reassign PORT here, use it directly
+//     app.listen(PORT, () => {
+//         console.log(`App is Listening on PORT ${PORT}`);
+//     });
+// }).catch(err => {
+//     console.log(err);
+// });
 const allowedOrigins = [
     'https://crownmode-fe.onrender.com', // Frontend URL 1
     'https://admin-panel-phi1.onrender.com', // Frontend URL 2
@@ -68,19 +65,17 @@ app.use(cors(corsOptions));
 const PORT = process.env.PORT || 4000; // Assign PORT variable here
 
 app.use(express.json());
-  
-// app.use(cors());
 
-const url=process.env.MONGODB_URL;
-
-mongoose.connect(url).then(() => {
-    // Don't reassign PORT here, use it directly
-    app.listen(PORT, () => {
-        console.log(`App is Listening on PORT ${PORT}`);
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`App is Listening on PORT ${PORT}`);
+        });
+    })
+    .catch(err => {
+        console.error(err);
     });
-}).catch(err => {
-    console.log(err);
-});
 
 // Rest of your code...
 
