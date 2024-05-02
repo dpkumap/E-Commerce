@@ -26,7 +26,7 @@
 
 // export default RelatedProducts
 import React, { useState, useEffect } from 'react';
-import ProductDisplay from './ProductDisplay';
+import ProductDisplay from '../ProductDisplay/ProductDisplay';
 
 const RelatedProducts = ({ category }) => {
     const [relatedProducts, setRelatedProducts] = useState([]);
