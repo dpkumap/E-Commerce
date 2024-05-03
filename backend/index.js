@@ -46,8 +46,8 @@ const cors = require('cors');
 // });
 const allowedOrigins = [
     'https://crownmode-fe.onrender.com', // Frontend URL 1
-    'https://admin-panel-phi1.onrender.com', // Frontend URL 2
-    // Add more origins as needed
+    // 'https://admin-panel-phi1.onrender.com', // Frontend URL 2
+    
 ];
 
 const corsOptions = {
