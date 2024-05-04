@@ -236,7 +236,7 @@
 @media (max-width: 500px) {
     .navbar {
         width: 100%; /* Adjust width as needed */
-        column-gap: 53px;
+        column-gap: 44px;
         /* justify-content: space-between; */
         /* z-index: 1000; */
         /* Other styles remain the same */
