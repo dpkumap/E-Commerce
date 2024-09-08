@@ -123,7 +123,7 @@ app.get("/",(req,res)=>{
 // })
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "./Public/temp")
+      cb(null, "./public/temp")
     },
     filename: function (req, file, cb) {
       
@@ -159,7 +159,7 @@ const storage = multer.diskStorage({
 
 //creating end point to upload imgs
 
-app.use('/images',express.static('./Public/temp'))
+app.use('/images',express.static('./public/temp'))
 
 app.post("/upload",
     upload.fields([
