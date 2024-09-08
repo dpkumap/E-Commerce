@@ -61,14 +61,14 @@ const AddProduct=()=>{
                 body: formData,
             });
     
-            if (!response.ok) {
+            if (!response) {
                 throw new Error('Failed to upload image');
             }
     
             const responseData = await response.json();
     
-            if (responseData.success) {
-                const updatedProductDetails = { ...productDetails, image: responseData.image_url };
+            if (responseData) {
+                const updatedProductDetails = { ...productDetails, image: responseData.secure_url };
                 setProductDetails(updatedProductDetails);
                 // console.log(updatedProductDetails);
                 await fetch('https://crownmode-be.onrender.com/addproduct',{

@@ -8,7 +8,15 @@ const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
 
+const cloudinary = require('cloudinary').v2;
+const fs =require('fs')
 
+cloudinary.config({
+    cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
+    api_key:process.env.CLOUDINARY_API_KEY,
+    api_secret:process.env.CLOUDINARY_SECRET_KEY
+
+})
 
 // const allowedOrigins = [
 //     'https://crownmode-fe.onrender.com', // Frontend URL 1
@@ -91,29 +99,99 @@ app.get("/",(req,res)=>{
 
 //image storage engine
 
+// const storage = multer.diskStorage({
+
+//     destination:"./upload/images",
+//     filename:(req,file,cb)=>{
+
+//         return cb(null,`${file.fieldname}_${Date.now()}_${path.extname(file.originalname)}`)
+//     }
+// })
+
+// const upload =multer({storage:storage})
+
+// //creating end point to upload imgs
+
+// app.use('/images',express.static('upload/images'))
+
+// app.post("/upload",upload.single('product'),(req,res)=>{
+
+//     res.json({
+//         success:1,
+//         image_url:`https://crownmode-be.onrender.com/images/${req.file.filename}`
+//     })
+// })
 const storage = multer.diskStorage({
-
-    destination:"./upload/images",
-    filename:(req,file,cb)=>{
-
-        return cb(null,`${file.fieldname}_${Date.now()}_${path.extname(file.originalname)}`)
+    destination: function (req, file, cb) {
+      cb(null, "./public/temp")
+    },
+    filename: function (req, file, cb) {
+      
+      cb(null, file.originalname)
     }
-})
+  })
+  
+ const upload = multer({ storage})
+ 
+ const uploadOnCloudinary=async (localFilePath)=>{
 
-const upload =multer({storage:storage})
+    try {
+        if(!localFilePath)return null
+        
+        //upload file
+         const res=await cloudinary.uploader.upload(localFilePath,{
+            resource_type:"auto"
+        })
+
+        //file upload successfully!
+        console.log("file uploaded",res.original_filename,res.url);
+        return res
+
+        
+    } catch (error) {
+        fs.unlinkSync(localFilePath)//remove locally saved temp files as the upload operation got failed
+        return null
+
+    }
+    
+}
+
 
 //creating end point to upload imgs
 
-app.use('/images',express.static('upload/images'))
+app.use('/images',express.static('./Public/temp'))
 
-app.post("/upload",upload.single('product'),(req,res)=>{
+app.post("/upload",
+    upload.fields([
+        {
+            name:"product",
+            maxCount:1   
+        }
+    ]),async (req,res)=>{
 
-    res.json({
-        success:1,
-        image_url:`https://crownmode-be.onrender.com/images/${req.file.filename}`
+        try {
+            const productLocalPath=req.files?.product[0]?.path
+
+            if(!productLocalPath){
+              return response=APIResponse(false,"product file required",productLocalPath,0)
+            }
+        
+            const products =await uploadOnCloudinary(productLocalPath)
+        
+            if(!products){
+              return response=APIResponse(false,"avatar string required",productLocalPath,0)
+            }
+            res.status(201).send(products)
+            
+        } catch (error) {
+            res.status(500).json({
+                error:{
+                    message:"An error occured while uploading img",
+                    stack:error.stack
+                }
+            })
+        }
     })
-})
-
 //create endpoint to add product in DB
 
 //we need  create schema for creating product
@@ -256,7 +334,7 @@ const Users=mongoose.model('Users',{
         type:Date,
         default:Date.now,
     }
-})
+})     
 
 //creating APi(or endpoint) for registering user to create user account
 app.post('/signup',async (req,res)=>{
