@@ -81,11 +81,9 @@ const AddProduct=()=>{
                 }).then((resp)=>resp.json()).then((data)=>{
                      data.success?alert("Product Added"):alert("Failed")
                 })
-            } else {
-                // console.log("Nothing");
-            }
+            } 
         } catch (error) {
-            // console.error('Error occurred during image upload:', error);
+            console.error('Error occurred during image upload:', error);
         }
     };
     
