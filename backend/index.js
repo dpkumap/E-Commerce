@@ -9,7 +9,8 @@ const path = require('path');
 const cors = require('cors');
 
 const cloudinary = require('cloudinary').v2;
-const fs =require('fs')
+const fs =require('fs');
+const { Readable } = require("stream");
 
 cloudinary.config({
     cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
