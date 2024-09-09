@@ -70,7 +70,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-const PORT = process.env.PORT || 4000; // Assign PORT variable here
+const PORT = process.env.PORT || 5000; // Assign PORT variable here
 
 app.use(express.json());
 
@@ -121,80 +121,144 @@ app.get("/",(req,res)=>{
 //         image_url:`https://crownmode-be.onrender.com/images/${req.file.filename}`
 //     })
 // })
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'public', 'temp')); 
-    },
-    filename: function (req, file, cb) {
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, path.join(__dirname, 'public', 'temp')); 
+//     },
+//     filename: function (req, file, cb) {
       
-      cb(null, file.originalname)
-    }
-  })
+//       cb(null, file.originalname)
+//     }
+//   })
   
- const upload = multer({ storage})
+//  const upload = multer({ storage})
  
- const uploadOnCloudinary=async (localFilePath)=>{
+//  const uploadOnCloudinary=async (localFilePath)=>{
 
-    try {
-        if(!localFilePath)return null
+//     try {
+//         if(!localFilePath)return null
         
-        //upload file
-         const res=await cloudinary.uploader.upload(localFilePath,{
-            resource_type:"auto"
-        })
+//         //upload file
+//          const res=await cloudinary.uploader.upload(localFilePath,{
+//             resource_type:"auto"
+//         })
 
-        //file upload successfully!
-        console.log("file uploaded",res.original_filename,res.url);
-        return res
+//         //file upload successfully!
+//         console.log("file uploaded",res.original_filename,res.url);
+//         return res
 
         
-    } catch (error) {
-        fs.unlinkSync(localFilePath)//remove locally saved temp files as the upload operation got failed
-        return null
+//     } catch (error) {
+//         fs.unlinkSync(localFilePath)//remove locally saved temp files as the upload operation got failed
+//         return null
 
-    }
+//     }
     
-}
+// }
 
 
-//creating end point to upload imgs
+// //creating end point to upload imgs
 
-app.use('/images',express.static('./public/temp'))
+// app.use('/images',express.static('./public/temp'))
 
-app.post("/upload",
-    upload.fields([
-        {
-            name:"product",
-            maxCount:1   
-        }
-    ]),async (req,res)=>{
+// app.post("/upload",
+//     upload.fields([
+//         {
+//             name:"product",
+//             maxCount:1   
+//         }
+//     ]),async (req,res)=>{
 
-        try {
-            const productLocalPath=req.files?.product[0]?.path
+//         try {
+//             const productLocalPath=req.files?.product[0]?.path
 
-            if(!productLocalPath){
-              return response=APIResponse(false,"product file required",productLocalPath,0)
-            }
+//             if(!productLocalPath){
+//               return response=APIResponse(false,"product file required",productLocalPath,0)
+//             }
         
-            const products =await uploadOnCloudinary(productLocalPath)
+//             const products =await uploadOnCloudinary(productLocalPath)
         
-            if(!products){
-              return response=APIResponse(false,"avatar string required",productLocalPath,0)
-            }
-            res.status(201).send(products)
+//             if(!products){
+//               return response=APIResponse(false,"avatar string required",productLocalPath,0)
+//             }
+//             res.status(201).send(products)
             
-        } catch (error) {
-            res.status(500).json({
-                error:{
-                    message:"An error occured while uploading img",
-                    stack:error.stack
-                }
-            })
-        }
-    })
+//         } catch (error) {
+//             res.status(500).json({
+//                 error:{
+//                     message:"An error occured while uploading img",
+//                     stack:error.stack
+//                 }
+//             })
+//         }
+//     })
 //create endpoint to add product in DB
 
 //we need  create schema for creating product
+
+const storage = multer.memoryStorage();
+
+const upload = multer({ storage });
+
+// Cloudinary file upload helper function
+const uploadOnCloudinary = async (fileBuffer, originalName) => {
+    try {
+        // Convert buffer to a readable stream
+        const bufferStream = new Readable();
+        bufferStream.push(fileBuffer);
+        bufferStream.push(null);
+
+        return new Promise((resolve, reject) => {
+            const uploadStream = cloudinary.uploader.upload_stream(
+                { resource_type: 'auto', public_id: path.parse(originalName).name },
+                (error, result) => {
+                    if (error) {
+                        console.error('Cloudinary upload error:', error);
+                        return reject(error);
+                    }
+                    console.log("File uploaded to Cloudinary:", result.url);
+                    resolve(result);
+                }
+            );
+            bufferStream.pipe(uploadStream); // Pipe the file buffer to Cloudinary
+        });
+    } catch (error) {
+        console.error("Error during Cloudinary upload:", error);
+        throw error;
+    }
+};
+
+// Static endpoint for serving files if necessary (optional)
+app.use('/images', express.static(path.join(__dirname, 'public', 'temp')));
+
+// POST endpoint for file upload
+app.post('/upload', upload.fields([{ name: 'product', maxCount: 1 }]), async (req, res) => {
+    try {
+        const productFile = req.files?.product?.[0];
+
+        if (!productFile) {
+            return res.status(400).json({ success: false, message: "Product file required" });
+        }
+
+        // Upload the file buffer to Cloudinary
+        const cloudinaryResponse = await uploadOnCloudinary(productFile.buffer, productFile.originalname);
+
+        if (!cloudinaryResponse) {
+            return res.status(500).json({ success: false, message: "File upload to Cloudinary failed" });
+        }
+
+        // Respond with Cloudinary result
+        res.status(201).json(cloudinaryResponse);
+    } catch (error) {
+        console.error("Error during file upload:", error.message);
+        res.status(500).json({
+            error: {
+                message: "An error occurred while uploading the image",
+                stack: error.stack,
+            },
+        });
+    }
+});
 
 const Product = mongoose.model("Product",{
     id:{
