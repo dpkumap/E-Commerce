@@ -51,41 +51,104 @@ const AddProduct=()=>{
     //         console.log("nothing")
     //     }
     // }
+    // const Add_Product = async () => {
+    //     try {
+    //         let formData = new FormData();
+    //         formData.append('product', image);
+    
+    //         const response = await fetch('https://crownmode-be.onrender.com/upload', {
+    //             method: 'POST',
+    //             body: formData,
+    //         });
+    
+    //         if (!response) {
+    //             throw new Error('Failed to upload image');
+    //         }
+    
+    //         const responseData = await response.json();
+    
+    //         if (responseData) {
+    //             const updatedProductDetails = { ...productDetails, image: responseData.secure_url };
+    //             setProductDetails(updatedProductDetails);
+    //             // console.log(updatedProductDetails);
+    //             await fetch('https://crownmode-be.onrender.com/addproduct',{
+    //                 method:"POST",
+    //                 headers:{
+    //                     Accept:"application/json",
+    //                    "Content-Type":"application/json",
+    //                 },
+    //                 body:JSON.stringify(updatedProductDetails),
+    //             }).then((resp)=>resp.json()).then((data)=>{
+    //                  data.success?alert("Product Added"):alert("Failed")
+    //             })
+    //         } 
+    //     } catch (error) {
+    //         console.error('Error occurred during image upload:', error);
+    //     }
+    // };
     const Add_Product = async () => {
         try {
+            // Ensure image exists before uploading
+            if (!image) {
+                alert('Please select an image before submitting.');
+                return;
+            }
+    
+            // Create FormData and append the image file
             let formData = new FormData();
             formData.append('product', image);
     
-            const response = await fetch('https://crownmode-be.onrender.com/upload', {
+            // Upload image to the backend
+            const imageUploadResponse = await fetch('https://crownmode-be.onrender.com/upload', {
                 method: 'POST',
                 body: formData,
             });
     
-            if (!response) {
+            // Check if the image upload failed
+            if (!imageUploadResponse.ok) {
                 throw new Error('Failed to upload image');
             }
     
-            const responseData = await response.json();
+            // Parse the JSON response from image upload
+            const imageData = await imageUploadResponse.json();
     
-            if (responseData) {
-                const updatedProductDetails = { ...productDetails, image: responseData.secure_url };
-                setProductDetails(updatedProductDetails);
-                // console.log(updatedProductDetails);
-                await fetch('https://crownmode-be.onrender.com/addproduct',{
-                    method:"POST",
-                    headers:{
-                        Accept:"application/json",
-                       "Content-Type":"application/json",
+            if (imageData && imageData.secure_url) {
+                // Update product details with the image URL returned from Cloudinary
+                const updatedProductDetails = { ...productDetails, image: imageData.secure_url };
+    
+                // Send product details to backend
+                const productResponse = await fetch('https://crownmode-be.onrender.com/addproduct', {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
                     },
-                    body:JSON.stringify(updatedProductDetails),
-                }).then((resp)=>resp.json()).then((data)=>{
-                     data.success?alert("Product Added"):alert("Failed")
-                })
-            } 
+                    body: JSON.stringify(updatedProductDetails),
+                });
+    
+                // Check if the product addition failed
+                if (!productResponse.ok) {
+                    throw new Error('Failed to add product');
+                }
+    
+                // Parse the JSON response from product addition
+                const productData = await productResponse.json();
+    
+                // Show a success or failure message based on the server response
+                if (productData.success) {
+                    alert('Product Added Successfully');
+                } else {
+                    alert('Failed to Add Product');
+                }
+            } else {
+                throw new Error('Invalid image data returned from server');
+            }
         } catch (error) {
-            console.error('Error occurred during image upload:', error);
+            console.error('Error occurred during product addition:', error);
+            alert('An error occurred. Please try again.');
         }
     };
+    
     
     //creating function to connect 
 
