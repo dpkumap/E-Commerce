@@ -345,7 +345,7 @@ app.post('/addproduct',async (req,res)=>{
         });
       } catch (error) {
         console.error(error);
-        res.status(500).json({ success: false, errors: "Error adding product" });
+        res.status(500).json({ success: false, errors: "Error adding product",data:error });
       }
 })
 
